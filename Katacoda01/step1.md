@@ -41,6 +41,11 @@ Usaremos el terminal de comandos para crear nuestro proyecto [Maven](https://mav
       &lt;version&gt;3.8.1&lt;/version&gt;
       &lt;scope&gt;test&lt;/scope&gt;
     &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;io.github.project-openubl&lt;/groupId&gt;
+        &lt;artifactId&gt;xbuilder&lt;/artifactId&gt;
+        &lt;version&gt;1.2.1.Final&lt;/version&gt;
+    &lt;/dependency&gt;
   &lt;/dependencies&gt;
 &lt;/project&gt;
 </pre>
