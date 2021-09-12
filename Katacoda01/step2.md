@@ -112,3 +112,17 @@ EOF
 ## Observa el contenido de `DefaultSystemClock.java`
 
 Abre el archivo `xbuilder-quickstart/src/main/java/org/openubl/xbuilder/DefaultSystemClock.java`{{open}} y analiza el contenido.
+
+Tenemos todo configurado y estamos listos para ver el XML generado por nuestro proyecto Java.
+
+## Ejecuta el proyecto Maven
+
+Ejecuta el proyecto usando el comando:
+
+`mvn -f xbuilder-quickstart compile exec:java -Dexec.mainClass="org.openubl.xbuilder.Main"`{{execute T1}}
+
+
+### Visualiza el XML con una herramienta
+
+- Copia el XML resultado de ejecutar el comando del primer paso.
+- Abre la página https://jsonformatter.org/xml-pretty-print y pega el XML.
