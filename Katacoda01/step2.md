@@ -1,42 +1,152 @@
-- Abre el archivo `xbuilder-quickstart/pom.xml`{{open}}
-- Agrega la dependencia **xbuilder**:
+XBuilder requiere que tu configures algunos valores como la moneda de emisión, el valor del IGV, etc. Para mayor información lee la documentación oficial [crear-un-config](https://project-openubl.github.io/docs/xbuilder/create-xml#crear-un-config)
 
-```xml
-<dependency>
-    <groupId>io.github.project-openubl</groupId>
-    <artifactId>xbuilder</artifactId>
-    <version>1.2.1.Final</version>
-</dependency>
-```{{copy}}
+El presente ejemplo tiene variables como el IGV escrito en el código; sin embargo, en tu software tu puedes decidir cargar esos valores desde tu base de datos, variables de entorno, archivos, etc.
 
-### Versión final de pom.xml
+## Crea `ConfigDefaults.java`
 
-<pre class="file" data-filename="xbuilder-quickstart/pom.xml" data-target="replace">
-&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"&gt;
-  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-  &lt;groupId&gt;org.openubl.xbuilder&lt;/groupId&gt;
-  &lt;artifactId&gt;xbuilder-quickstart&lt;/artifactId&gt;
-  &lt;packaging&gt;jar&lt;/packaging&gt;
-  &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
-  &lt;name&gt;xbuilder-quickstart&lt;/name&gt;
-  &lt;url&gt;http://maven.apache.org&lt;/url&gt;
-  &lt;properties&gt;
-    &lt;maven.compiler.source&gt;1.8&lt;/maven.compiler.source&gt;
-    &lt;maven.compiler.target&gt;1.8&lt;/maven.compiler.target&gt;
-  &lt;/properties&gt;
-  &lt;dependencies&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;junit&lt;/groupId&gt;
-      &lt;artifactId&gt;junit&lt;/artifactId&gt;
-      &lt;version&gt;3.8.1&lt;/version&gt;
-      &lt;scope&gt;test&lt;/scope&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;io.github.project-openubl&lt;/groupId&gt;
-        &lt;artifactId&gt;xbuilder&lt;/artifactId&gt;
-        &lt;version&gt;1.2.1.Final&lt;/version&gt;
-    &lt;/dependency&gt;
-  &lt;/dependencies&gt;
-&lt;/project&gt;
-</pre>
+Aquí tienes una clase Java llamada `ConfigDefaults.java` que contiene todo lo requerido por XBuilder.
+
+Has click en el siguiente comando para que pueda ser ejecutado:
+
+````shell
+cat << EOF > xbuilder-quickstart/src/main/java/org/openubl/xbuilder/ConfigDefaults.java
+package org.openubl.xbuilder;
+
+import io.github.project.openubl.xmlbuilderlib.config.Config;
+import io.github.project.openubl.xmlbuilderlib.models.catalogs.Catalog10;
+import io.github.project.openubl.xmlbuilderlib.models.catalogs.Catalog7;
+import io.github.project.openubl.xmlbuilderlib.models.catalogs.Catalog9;
+
+import java.math.BigDecimal;
+
+public class ConfigDefaults implements Config {
+    private BigDecimal igv = new BigDecimal("0.18");
+    private BigDecimal ivap = new BigDecimal("0.04");
+    private String defaultMoneda = "PEN";
+    private String defaultUnidadMedida = "NIU";
+    private Catalog9 defaultTipoNotaCredito = Catalog9.ANULACION_DE_LA_OPERACION;
+    private Catalog10 defaultTipoNotaDebito = Catalog10.AUMENTO_EN_EL_VALOR;
+    private BigDecimal defaultIcb = new BigDecimal("0.2");
+    private Catalog7 defaultTipoIgv = Catalog7.GRAVADO_OPERACION_ONEROSA;
+
+    @Override
+    public BigDecimal getIgv() {
+        return igv;
+    }
+
+    @Override
+    public BigDecimal getIvap() {
+        return ivap;
+    }
+
+    @Override
+    public String getDefaultMoneda() {
+        return defaultMoneda;
+    }
+
+    @Override
+    public String getDefaultUnidadMedida() {
+        return defaultUnidadMedida;
+    }
+
+    @Override
+    public Catalog9 getDefaultTipoNotaCredito() {
+        return defaultTipoNotaCredito;
+    }
+
+    @Override
+    public Catalog10 getDefaultTipoNotaDebito() {
+        return defaultTipoNotaDebito;
+    }
+
+    @Override
+    public BigDecimal getDefaultIcb() {
+        return defaultIcb;
+    }
+
+    @Override
+    public Catalog7 getDefaultTipoIgv() {
+        return defaultTipoIgv;
+    }
+}
+EOF
+```{{execute}}
+
+## Observa el contenido de `ConfigDefaults.java`
+
+Abre el archivo `xbuilder-quickstart/src/main/java/org/openubl/xbuilder/ConfigDefaults.java`{{open}} y analiza el contenido.
+
+
+## Crea `DefaultSystemClock.java`
+
+Aquí tienes una clase Java llamada `ConfigDefaults.java` que contiene todo lo requerido por XBuilder.
+
+Has click en el siguiente comando para que pueda ser ejecutado:
+
+````shell
+cat << EOF > xbuilder-quickstart/src/main/java/org/openubl/xbuilder/ConfigDefaults.java
+package org.openubl.xbuilder;
+
+import io.github.project.openubl.xmlbuilderlib.config.Config;
+import io.github.project.openubl.xmlbuilderlib.models.catalogs.Catalog10;
+import io.github.project.openubl.xmlbuilderlib.models.catalogs.Catalog7;
+import io.github.project.openubl.xmlbuilderlib.models.catalogs.Catalog9;
+
+import java.math.BigDecimal;
+
+public class ConfigDefaults implements Config {
+    private BigDecimal igv = new BigDecimal("0.18");
+    private BigDecimal ivap = new BigDecimal("0.04");
+    private String defaultMoneda = "PEN";
+    private String defaultUnidadMedida = "NIU";
+    private Catalog9 defaultTipoNotaCredito = Catalog9.ANULACION_DE_LA_OPERACION;
+    private Catalog10 defaultTipoNotaDebito = Catalog10.AUMENTO_EN_EL_VALOR;
+    private BigDecimal defaultIcb = new BigDecimal("0.2");
+    private Catalog7 defaultTipoIgv = Catalog7.GRAVADO_OPERACION_ONEROSA;
+
+    @Override
+    public BigDecimal getIgv() {
+        return igv;
+    }
+
+    @Override
+    public BigDecimal getIvap() {
+        return ivap;
+    }
+
+    @Override
+    public String getDefaultMoneda() {
+        return defaultMoneda;
+    }
+
+    @Override
+    public String getDefaultUnidadMedida() {
+        return defaultUnidadMedida;
+    }
+
+    @Override
+    public Catalog9 getDefaultTipoNotaCredito() {
+        return defaultTipoNotaCredito;
+    }
+
+    @Override
+    public Catalog10 getDefaultTipoNotaDebito() {
+        return defaultTipoNotaDebito;
+    }
+
+    @Override
+    public BigDecimal getDefaultIcb() {
+        return defaultIcb;
+    }
+
+    @Override
+    public Catalog7 getDefaultTipoIgv() {
+        return defaultTipoIgv;
+    }
+}
+EOF
+```{{execute}}
+
+## Observa el contenido de `ConfigDefaults.java`
+
+Abre el archivo `xbuilder-quickstart/src/main/java/org/openubl/xbuilder/ConfigDefaults.java`{{open}} y analiza el contenido.
