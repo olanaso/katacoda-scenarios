@@ -4,7 +4,9 @@ La creación de una factura es explicada en la documentación oficial [crea-el-x
 
 ## Crea `Main.java`
 
-Aquí tienes una clase llamada `Main.java` con en contenido requerido para crear una factura electrónica.
+La creacion del comprobante electronico haciendo uso del tutorial crear [XML Builder Quick Start](https://katacoda.com/openubl/scenarios/xbuilder-quickstart)
+
+Aquí tienes una clase llamada `Main.java` con en ejemplo para poder firmar el XML resultante.
 
 Has click en el siguiente comando para que pueda ser ejecutado:
 
@@ -64,6 +66,7 @@ public class Main {
 EOF
 ```{{execute}}
 
+````
 ## Observa el contenido de `Main.java`
 
 Abre el archivo `xbuilder-quickstart/src/main/java/org/openubl/xbuilder/Main.java`{{open}} y analiza el contenido.
